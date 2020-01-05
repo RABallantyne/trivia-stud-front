@@ -3,22 +3,19 @@ import NewTeamForm from "./NewTeamForm";
 import TeamContainer from "./TeamContainer";
 export default class App extends Component {
   state = {
-    rounds: 1,
+    rounds: 4,
     teams: []
   };
 
   changeRounds = event => {
     const { name, value } = event.target;
     this.setState({
-      [name]: value
+      [name]: +value
     });
   };
 
   submitRounds = event => {
     event.preventDefault();
-    this.setState({
-      rounds: event.target.value
-    });
   };
 
   addTeam = team => {
@@ -39,7 +36,11 @@ export default class App extends Component {
           ></input>
         </form>
         <NewTeamForm addTeam={this.addTeam} />
-        <TeamContainer teams={this.state.teams} />
+        <TeamContainer
+          createRow={this.createRow}
+          teams={this.state.teams}
+          rounds={this.state.rounds}
+        />
       </div>
     );
   }
