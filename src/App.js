@@ -19,7 +19,11 @@ export default class App extends Component {
   };
 
   addTeam = team => {
-    const newTeam = { id: Date.now(), scores: [], ...team };
+    let scores = [];
+    for (let i = 0; i < this.state.rounds; i++) {
+      scores.push(0);
+    }
+    const newTeam = { id: Date.now(), scores, ...team };
     this.setState({
       teams: [...this.state.teams, newTeam]
     });

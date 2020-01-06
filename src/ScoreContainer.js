@@ -5,7 +5,7 @@ export default function ScoreContainer(props) {
   console.log(props);
   return (
     <div>
-      <ScoreRow team={props.team} rounds={props.rounds} scores={props.scores} />
+      <ScoreRow team={props.team} rounds={props.rounds} />
     </div>
   );
 }
