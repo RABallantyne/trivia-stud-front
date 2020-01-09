@@ -2,6 +2,16 @@ import React from "react";
 import TeamItem from "./TeamItem";
 
 export default function TeamContainer(props) {
+  let sortButtonDisplay = props.teams[0]
+    ? props.teams[0].scores.map((score, i) => {
+        return (
+          <th>
+            <button onClick={() => props.sortByScores(i)}>sort</button>
+          </th>
+        );
+      })
+    : null;
+
   let roundDisplay = props.teams[0]
     ? props.teams[0].scores.map((score, i) => {
         return <th>Round {i + 1}</th>;
@@ -20,11 +30,18 @@ export default function TeamContainer(props) {
       })
     : null;
 
-  console.log(props.teams);
-
   return (
     <table>
       <thead>
+        <tr>
+          <th>
+            <button onClick={() => props.sortTeams("name")}>sort</button>
+          </th>
+          {sortButtonDisplay}
+          <th>
+            <button onClick={() => props.sortTeams("total")}>sort</button>
+          </th>
+        </tr>
         <tr>
           <th>Team Name</th>
           {roundDisplay}
