@@ -8,9 +8,8 @@ export default function TeamItem(props) {
       <ScoreContainer
         team={props.team}
         rounds={props.rounds}
-        // scores={props.scores}
+        updateScore={props.updateScore}
       />
-      {/* <h3>{props.team.scores}</h3> */}
     </div>
   );
 }

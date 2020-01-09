@@ -22,6 +22,7 @@ export default class NewTeamForm extends Component {
   render() {
     return (
       <div>
+        <h1>Enter Team Name:</h1>
         <form onSubmit={this.handleSubmit}>
           <input
             onChange={this.handleChange}

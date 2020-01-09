@@ -11,11 +11,18 @@ export default class ScoreItem extends Component {
       [name]: +value
     });
   };
+
+  submitScore = event => {
+    const { team, index } = this.props;
+    event.preventDefault();
+    this.props.updateScore(team.id, this.state.score, index);
+  };
   render() {
     return (
       <div>
-        <form onSubmit={event => event.preventDefault()}>
+        <form onSubmit={this.submitScore}>
           <input
+            name="score"
             onChange={this.changeScore}
             placeholder={this.state.score}
           ></input>
