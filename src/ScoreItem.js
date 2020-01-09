@@ -19,7 +19,7 @@ export default class ScoreItem extends Component {
   };
   render() {
     return (
-      <div>
+      <td>
         <form onSubmit={this.submitScore}>
           <input
             name="score"
@@ -27,7 +27,7 @@ export default class ScoreItem extends Component {
             placeholder={this.state.score}
           ></input>
         </form>
-      </div>
+      </td>
     );
   }
 }

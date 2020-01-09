@@ -15,10 +15,8 @@ export default function ScoreRow(props) {
 
   return (
     <>
-      <div>
-        <h2>{displayScores}</h2>
-        <h2>score: {props.team.total}</h2>
-      </div>
+      {displayScores}
+      {/* <h2>score: {props.team.total}</h2> */}
     </>
   );
 }

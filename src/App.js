@@ -65,9 +65,7 @@ export default class App extends Component {
         ) : null}
         <NewTeamForm addTeam={this.addTeam} />
         <TeamContainer
-          createRow={this.createRow}
           teams={this.state.teams}
-          rounds={this.state.rounds}
           updateScore={this.updateTeamScore}
         />
       </div>
