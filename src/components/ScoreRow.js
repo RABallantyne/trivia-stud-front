@@ -13,10 +13,5 @@ export default function ScoreRow(props) {
     );
   });
 
-  return (
-    <>
-      {displayScores}
-      {/* <h2>score: {props.team.total}</h2> */}
-    </>
-  );
+  return <>{displayScores}</>;
 }

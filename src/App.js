@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import NewTeamForm from "./NewTeamForm";
-import TeamContainer from "./TeamContainer";
+import NewTeamForm from "./components/NewTeamForm";
+import TeamContainer from "./components/TeamContainer";
 export default class App extends Component {
   state = {
     teams: [],
@@ -39,9 +39,9 @@ export default class App extends Component {
     let total = 0;
 
     if (teams.length > 0) {
-      for (let i = 0; i < teams[0].scores.length; i++) {
+      teams[0].scores.forEach(score => {
         scores.push(0);
-      }
+      });
     }
 
     const newTeam = { id: Date.now(), scores, total, ...team };
