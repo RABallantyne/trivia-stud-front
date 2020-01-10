@@ -1,8 +1,10 @@
 import React, { Component } from "react";
+import "./components.css";
 
 export default class NewTeamForm extends Component {
   state = {
-    name: ""
+    name: "",
+    showForm: false
   };
 
   handleChange = event => {
@@ -16,22 +18,32 @@ export default class NewTeamForm extends Component {
     event.preventDefault();
     this.props.addTeam(this.state);
     this.setState({
-      name: ""
+      name: "",
+      showForm: false
     });
+  };
+
+  toggleAddForm = () => {
+    this.setState({ showForm: true });
   };
   render() {
     return (
-      <div>
-        <h1>Enter Team Name:</h1>
-        <form onSubmit={this.handleSubmit}>
-          <input
-            onChange={this.handleChange}
-            name="name"
-            value={this.state.name}
-            placeholder="Team Name"
-          ></input>
-          <button>add new team</button>
-        </form>
+      <div className="form-container">
+        <button onClick={() => this.toggleAddForm()}>ADD TEAM</button>
+        {this.state.showForm ? (
+          <>
+            <h3>Enter Team Name:</h3>
+            <form onSubmit={this.handleSubmit} className="new-team-form">
+              <input
+                onChange={this.handleChange}
+                name="name"
+                value={this.state.name}
+                placeholder="Team Name"
+              ></input>
+              <button>save new team</button>
+            </form>
+          </>
+        ) : null}
       </div>
     );
   }

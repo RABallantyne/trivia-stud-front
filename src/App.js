@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import NewTeamForm from "./components/NewTeamForm";
 import TeamContainer from "./components/TeamContainer";
+import "./App.css";
 export default class App extends Component {
   state = {
     teams: [],
@@ -94,8 +95,11 @@ export default class App extends Component {
 
   render() {
     return (
-      <div>
+      <div className="main-page">
+        <h1>WELCOME TO TRIVIA STUD!</h1>
+
         <NewTeamForm addTeam={this.addTeam} />
+
         {this.state.teams.length > 0 ? (
           <>
             <button
@@ -103,7 +107,9 @@ export default class App extends Component {
                 this.addRound();
               }}
             >
-              add round
+              {this.state.teams[0].scores.length > 0
+                ? "add round"
+                : "get started"}
             </button>
             <TeamContainer
               teams={this.state.teams}
