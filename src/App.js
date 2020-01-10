@@ -3,37 +3,20 @@ import NewTeamForm from "./NewTeamForm";
 import TeamContainer from "./TeamContainer";
 export default class App extends Component {
   state = {
-    rounds: 0,
     teams: [],
-    showRoundEdit: true,
-    displayTeams: []
-  };
-
-  setRounds = event => {
-    const { name, value } = event.target;
-    let n = +value;
-    if (!n) {
-      alert("please enter a number.");
-      return null;
-    }
-    this.setState({
-      [name]: n
-    });
-  };
-
-  submitRounds = event => {
-    event.preventDefault();
-    this.setState({
-      showRoundEdit: false
-    });
+    showRoundEdit: true
   };
 
   addTeam = team => {
     const { teams } = this.state;
     let valid = true;
+    if (team.name.length === 0) {
+      alert("you gotta name that team!");
+      valid = false;
+    }
     if (teams.length > 0) {
       teams.forEach(_team => {
-        if (_team.name === team.name) {
+        if (_team.name.toLowerCase() === team.name.toLowerCase()) {
           alert("team name taken!");
           valid = false;
         }
@@ -42,15 +25,28 @@ export default class App extends Component {
     return valid ? this.createTeam(team) : null;
   };
 
+  addRound = () => {
+    const { teams } = this.state;
+    teams.forEach(team => {
+      team.scores.push(0);
+    });
+    this.setState({});
+  };
+
   createTeam = team => {
+    const { teams } = this.state;
     let scores = [];
     let total = 0;
-    for (let i = 0; i < this.state.rounds; i++) {
-      scores.push(0);
+
+    if (teams.length > 0) {
+      for (let i = 0; i < teams[0].scores.length; i++) {
+        scores.push(0);
+      }
     }
+
     const newTeam = { id: Date.now(), scores, total, ...team };
     this.setState({
-      teams: [...this.state.teams, newTeam]
+      teams: [...teams, newTeam]
     });
   };
 
@@ -69,7 +65,7 @@ export default class App extends Component {
     let sortedTeams = [];
     param === "name"
       ? (sortedTeams = this.state.teams.sort((a, b) =>
-          a[param] > b[param] ? 1 : -1
+          a[param].toLowerCase() > b[param].toLowerCase() ? 1 : -1
         ))
       : (sortedTeams = this.state.teams.sort((a, b) =>
           a[param] < b[param] ? 1 : -1
@@ -81,57 +77,41 @@ export default class App extends Component {
 
   sortByScores = round => {
     const { teams } = this.state;
-    let scoreMap = {};
-    for (let i = 0; i < teams.length; i++) {
-      scoreMap[teams[i].name] = teams[i].scores[round];
-    }
-    let sorted = [];
-    for (let team in scoreMap) {
-      sorted.push([team, scoreMap[team]]);
-    }
-    sorted.sort((a, b) => {
-      return b[1] - a[1];
+    let index = round;
+    teams.sort((a, b) => {
+      if (a.scores[index] < b.scores[index]) {
+        return 1;
+      } else if (a.scores[index] > b.scores[index]) {
+        return -1;
+      } else {
+        return 0;
+      }
     });
-    let sortedTeams = [];
-    for (let i = 0; i < teams.length; i++) {
-      for (let j = 0; j < teams.length; j++)
-        if (sorted[i][0] === teams[j].name) {
-          sortedTeams.push(teams[j]);
-        }
-    }
     this.setState({
-      teams: sortedTeams
+      teams: teams
     });
   };
 
   render() {
     return (
       <div>
-        {this.state.showRoundEdit ? (
-          <>
-            <h1>
-              Welcome to Trivia Stud! to begin please enter the number of
-              rounds.
-            </h1>
-            <form onSubmit={this.submitRounds}>
-              <input
-                onChange={this.setRounds}
-                name="rounds"
-                value={this.state.rounds}
-              ></input>
-            </form>
-          </>
-        ) : (
-          <NewTeamForm addTeam={this.addTeam} />
-        )}
-
+        <NewTeamForm addTeam={this.addTeam} />
         {this.state.teams.length > 0 ? (
-          <TeamContainer
-            teams={this.state.teams}
-            updateScore={this.updateTeamScore}
-            sortTeams={this.sortTeams}
-            sortByScores={this.sortByScores}
-          />
+          <>
+            <button
+              onClick={() => {
+                this.addRound();
+              }}
+            >
+              add round
+            </button>
+            <TeamContainer
+              teams={this.state.teams}
+              updateScore={this.updateTeamScore}
+              sortTeams={this.sortTeams}
+              sortByScores={this.sortByScores}
+            />
+          </>
         ) : null}
       </div>
     );
