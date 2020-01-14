@@ -8,3 +8,18 @@
 .new-team-form {
   padding: 0.5rem;
 }
+
+input {
+  font-size: 100%;
+  font-family: inherit;
+  border: 0;
+  padding: 0.5rem;
+  margin: 0.5rem;
+  width: 4rem;
+}
+
+table,
+th,
+td {
+  border: 0.2rem solid black;
+}

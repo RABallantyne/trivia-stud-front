@@ -8,3 +8,12 @@
   padding: 1rem;
   border-radius: 0.3rem;
 }
+
+button {
+  background-color: rgb(194, 197, 230);
+  font-size: 100%;
+  font-family: inherit;
+  border: 0;
+  padding: 0.5rem;
+  margin: 0.5rem;
+}

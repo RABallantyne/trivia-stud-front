@@ -38,7 +38,7 @@ export default class NewTeamForm extends Component {
                 onChange={this.handleChange}
                 name="name"
                 value={this.state.name}
-                placeholder="Team Name"
+                placeholder="Name"
               ></input>
               <button>save new team</button>
             </form>
