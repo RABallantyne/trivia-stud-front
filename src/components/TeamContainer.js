@@ -22,9 +22,13 @@ export default function TeamContainer(props) {
     ? props.teams.map(team => {
         return (
           <tr>
-            <td>{team.name}</td>
+            <td>
+              <h2>{team.name}</h2>
+            </td>
             <TeamItem team={team} updateScore={props.updateScore} />
-            <td>{team.total}</td>
+            <td>
+              <h2>{team.total}</h2>
+            </td>
           </tr>
         );
       })

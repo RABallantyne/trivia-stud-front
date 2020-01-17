@@ -51,7 +51,7 @@ export default class ScoreItem extends Component {
             <button>save</button>
           </form>
         ) : (
-          <h2 onClick={() => this.toggleScoreForm()}>{this.props.score}</h2>
+          <p onClick={() => this.toggleScoreForm()}>{this.props.score}</p>
         )}
       </td>
     );
