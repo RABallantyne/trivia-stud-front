@@ -43,6 +43,7 @@ export default class ScoreItem extends Component {
         {this.state.showScoreForm ? (
           <form onSubmit={this.submitScore}>
             <input
+              pattern="[0-9]*"
               name="score"
               onChange={this.changeScore}
               placeholder="0"

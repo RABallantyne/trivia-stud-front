@@ -51,6 +51,11 @@ export default class App extends Component {
     });
   };
 
+  clearScores = () => {
+    this.setState({
+      teams: []
+    });
+  };
   updateTeamScore = (team, score, round) => {
     const { teams } = this.state;
     for (let i = 0; i < teams.length; i++) {
@@ -102,6 +107,13 @@ export default class App extends Component {
 
         {this.state.teams.length > 0 ? (
           <>
+            <button
+              onClick={() => {
+                this.clearScores();
+              }}
+            >
+              reset
+            </button>
             <button
               onClick={() => {
                 this.addRound();
